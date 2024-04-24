@@ -1,0 +1,6 @@
+**/__pycache__
+*.pyc
+.vs
+env
+oc_lettings_site.sqlite3
+manage.py
