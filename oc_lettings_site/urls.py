@@ -15,19 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-# from lettings import views
 import lettings.views
-# from profiles import views
 import profiles.views
+
 
 urlpatterns = [
     path('', lettings.views.home, name='home'),
-    # path('lettings/', lettings.views.lettings_index, name='lettings_index'),
     path('lettings/', lettings.views.index, name='lettings_index'),
     path('profiles/<int:letting_id>/', lettings.views.letting, name='letting'),
-    # path('profiles/', profiles.views.profiles_index, name='profiles_index'),
     path('profiles/', profiles.views.index, name='profiles_index'),
     path('profiles/<str:username>/', profiles.views.profile, name='profile'),
     path('admin/', admin.site.urls),
-    
 ]
