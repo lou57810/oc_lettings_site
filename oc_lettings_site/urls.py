@@ -14,16 +14,27 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 import lettings.views
 import profiles.views
 
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
+# handler404 = 'localhost.views.my_custom_page_not_found_view'
+
+
 urlpatterns = [
+    path('sentry-debug/', trigger_error),
     path('', lettings.views.home, name='home'),
-    path('lettings/', lettings.views.index, name='lettings_index'),
-    path('profiles/<int:letting_id>/', lettings.views.letting, name='letting'),
-    path('profiles/', profiles.views.index, name='profiles_index'),
-    path('profiles/<str:username>/', profiles.views.profile, name='profile'),
+    path("lettings/", include("lettings.urls")),
+    path("profiles/", include("profiles.urls")),
+
+    # path('lettings/', lettings.views.index, name='lettings_index'),
+    # path('lettings/<int:letting_id>/', lettings.views.letting, name='letting'),
+    # path('profiles/', profiles.views.index, name='profiles_index'),
+    # path('profiles/<str:username>/', profiles.views.profile, name='profile'),
+    
     path('admin/', admin.site.urls),
 ]

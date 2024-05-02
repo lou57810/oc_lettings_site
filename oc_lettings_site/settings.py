@@ -12,6 +12,26 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from pathlib import Path
+import sentry_sdk
+import logging
+
+# sentry_sdk.init(
+    # dsn=os.getenv('dsn'),
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    # profiles_sample_rate=1.0,
+    # max_breadcrumbs=50,
+    # debug=True,
+    #  enable_tracing=True,
+
+# )
+
+# logging.debug("Program is starting!")
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,7 +48,8 @@ SECRET_KEY = '(1vv5^6g#^my$%$6*6is*g!)o4xb%-i3r6m7huek(o72#jdh@4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.16.1.108', '127.0.0.1', 'localhost']
+# ALLOWED_HOSTS = ['172.16.1.108', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
