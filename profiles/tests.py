@@ -1,6 +1,6 @@
 from django.test import TestCase
 import pytest
-# from django.urls import reverse
+from django.urls import reverse
 from django.contrib.auth.models import User
 # from lettings.models import Address, Letting
 from profiles.models import Profile
@@ -19,3 +19,13 @@ def test_profile_creation():
     # Vérifier si le profil est créé avec succès
     assert profile.user.username == 'testuser'
     assert profile.favorite_city == 'Test City'
+
+
+class ProfilePageTest(TestCase):
+    def test_profile_page_status_code(self):
+        response = self.client.get(reverse('profiles_index'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_profile_page_template(self):
+        response = self.client.get(reverse('profiles_index'))
+        self.assertTemplateUsed(response, 'profiles/index.html')

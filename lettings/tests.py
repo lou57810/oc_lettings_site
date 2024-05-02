@@ -17,6 +17,16 @@ class HomePageTest(TestCase):
         response = self.client.get(reverse('home'))
         self.assertTemplateUsed(response, 'lettings/home.html')
 
+
+class LettingPageTest(TestCase):
+    def test_letting_page_status_code(self):
+        response = self.client.get(reverse('lettings_index'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_letting_page_template(self):
+        response = self.client.get(reverse('lettings_index'))
+        self.assertTemplateUsed(response, 'lettings/index.html')
+
 """ Test logging: """
 class UserCreationTest(TestCase):
     def test_user_creation(self):
