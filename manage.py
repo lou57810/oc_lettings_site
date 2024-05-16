@@ -4,10 +4,29 @@ import os
 import sys
 
 
+
+
+
+
+
+
+def before_breadcrumb(crumb, hint):
+    if crumb['category'] == 'a.spammy.Logger':
+        return None
+    return crumb
+
+
+
+
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'oc_lettings_site.settings')
+    # Init Django
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'oc_lettings_site.settings')  # setup.cfg [tool:pytest]
+
+    
+    
     try:
         from django.core.management import execute_from_command_line
+        
     except ImportError as exc:
         raise ImportError(
             "Couldn't import Django. Are you sure it's installed and "
