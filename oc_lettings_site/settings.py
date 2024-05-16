@@ -11,25 +11,49 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
 from pathlib import Path
-import sentry_sdk
+
+from dotenv import load_dotenv
+import sentry_sdk   # Ajouté pour le fonctionnement de Sentry sdk
+# from sentry_sdk.integrations.excepthook import ExcepthookIntegration
+# from sentry_sdk.integrations.arq import ArqIntegration
 import logging
 
-# sentry_sdk.init(
-    # dsn=os.getenv('dsn'),
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    # traces_sample_rate=1.0,
-    # Set profiles_sample_rate to 1.0 to profile 100%
-    # of sampled transactions.
-    # We recommend adjusting this value in production.
-    # profiles_sample_rate=1.0,
-    # max_breadcrumbs=50,
-    # debug=True,
-    #  enable_tracing=True,
 
-# )
 
+# Set traces_sample_rate to 1.0 to capture 100%
+# of transactions for performance monitoring.
+# traces_sample_rate=1.0,
+# Set profiles_sample_rate to 1.0 to profile 100%
+# of sampled transactions.
+# We recommend adjusting this value in production.
+# profiles_sample_rate=1.0,
+# max_breadcrumbs=50,
+# debug=True,
+#  enable_tracing=True,
+
+
+# ============= Init Sentry ============= #
+load_dotenv()
+dsn=os.getenv('dsn')
+
+sentry_sdk.init(dsn,
+max_breadcrumbs=50,
+traces_sample_rate=1.0,
+profiles_sample_rate=1.0,
+# fore_breadcrumb=before_breadcrumb,
+# Alternatively, to control sampling dynamically
+# profiles_sampler=profiles_sampler,
+debug=False,
+)
+# ======================================== #
+
+logging.debug("Lettings_site Program is starting!")
+sentry_sdk.add_breadcrumb(category="logger", message="Program is starting! ", level="info")
+
+
+# division_by_zero = 1 / 0
 # logging.debug("Program is starting!")
 
 
@@ -50,6 +74,9 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['172.16.1.108', '127.0.0.1', 'localhost']
 ALLOWED_HOSTS = []
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'   # Ajouté pour le fonctionnement de Sentry sdk
+
+
 
 
 # Application definition
