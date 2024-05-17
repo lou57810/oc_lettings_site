@@ -4,7 +4,7 @@ version: 2.1
 jobs:
     pytest:
         docker:
-            - image: cimg/python: 3.10.12
+            - image: cimg/python:3.10.12
         steps:
             - checkout
             - python/install-packages:
