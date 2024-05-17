@@ -1,0 +1,55 @@
+# CircleCI configuration file
+version: 2.1
+
+jobs:
+    pytest:
+        docker:
+            - image: cimg/python: 3.10.12
+        steps:
+            - checkout
+            - python/install-packages:
+                pkg-manager: pip
+                pip-dependency-file: requirements.txt
+            - run:
+                name: execution pytest
+                command: pytest
+    flake8:
+        docker:
+            - image: cimg/python: 3.10.12
+        steps:
+            - checkout
+            - run:
+                name: Install flake8
+                command: pip install flake8
+                
+            - run:
+                name: Generation rapport flake
+                command: flake8
+
+
+
+    build:
+        docker:
+        # Primary container image where all steps run
+            - image: cimg/base:2022.05
+        steps:
+            - checkout
+            - run: 
+                name: Build Docker image
+                command: docker build .
+
+workflows:
+    test_build:
+        jobs:
+            - flake8
+            - pytest            
+            - build:
+                filters:
+                    branch:
+                        only: main
+                require:
+                    - pytest
+                    - flake8
+                    
+
+     
