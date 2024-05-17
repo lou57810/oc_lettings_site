@@ -45,9 +45,9 @@ workflows:
             - pytest            
             - build:
                 filters:
-                    branch:
+                    branches:
                         only: main
-                require:
+                requires:
                     - pytest
                     - flake8
                     
