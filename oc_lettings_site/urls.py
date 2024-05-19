@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import lettings.views
-import profiles.views
+# import profiles.views
 
 
 # def trigger_error(request):
-    # division_by_zero = 1 / 0
+# division_by_zero = 1 / 0
 
 # handler404 = 'localhost.views.my_custom_page_not_found_view'
 
@@ -36,6 +36,6 @@ urlpatterns = [
     # path('lettings/<int:letting_id>/', lettings.views.letting, name='letting'),
     # path('profiles/', profiles.views.index, name='profiles_index'),
     # path('profiles/<str:username>/', profiles.views.profile, name='profile'),
-    
+
     path('admin/', admin.site.urls),
 ]

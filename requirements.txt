@@ -1,13 +1,12 @@
 asgiref==3.8.1
+certifi==2024.2.2
 colorama==0.4.6
 Django==5.0.6
-dotenv-python==0.0.1
 entrypoints==0.4
 flake8==7.0.0
 flake8-html==0.4.3
 iniconfig==2.0.0
 Jinja2==3.1.4
-load-dotenv==0.1.0
 MarkupSafe==2.1.5
 mccabe==0.7.0
 packaging==24.0
@@ -17,9 +16,10 @@ pyflakes==3.2.0
 Pygments==2.18.0
 pytest==8.2.0
 pytest-django==4.8.0
+python-dotenv==1.0.1
 pytz==2024.1
-sentry-sdk==2.1.1
+sentry-sdk==2.2.0
 setuptools==69.5.1
 sqlparse==0.5.0
 tzdata==2024.1
-dotenv==0.0.5
+urllib3==2.2.1

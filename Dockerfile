@@ -12,7 +12,7 @@ COPY . /app
 COPY ./requirements.txt /app
 # install dependencies in requirements.txt
 # RUN pip install -r requirements.txt
-RUN pip install -r /app/requirements.txt
+RUN pip3 install -r /app/requirements.txt
 
 ADD oc-lettings-site.sqlite3 /app
 

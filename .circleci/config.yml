@@ -27,13 +27,10 @@ jobs:
                 pip-dependency-file: requirements.txt
             - run:
                 name: Install flake8
-                command: pip install flake8
-                
+                command: pip3 install flake8
             - run:
                 name: Generation rapport flake
                 command: flake8
-
-
 
     build:
         docker:
@@ -49,7 +46,7 @@ workflows:
     test_build:
         jobs:
             - flake8
-            - pytest            
+            - pytest
             - build:
                 filters:
                     branches:
@@ -57,6 +54,3 @@ workflows:
                 requires:
                     - pytest
                     - flake8
-                    
-
-     
