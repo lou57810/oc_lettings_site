@@ -69,11 +69,10 @@ SECRET_KEY = '(1vv5^6g#^my$%$6*6is*g!)o4xb%-i3r6m7huek(o72#jdh@4'
 # SECRET_KEY = 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ['172.16.1.108', '127.0.0.1', 'localhost']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'   # Ajouté pour le fonctionnement de Sentry sdk
 
 # Application definition

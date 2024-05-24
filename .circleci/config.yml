@@ -1,6 +1,8 @@
 # CircleCI configuration file
 version: 2.1
 
+# Orbs = reusable snippets of code that help automate repeated processes,
+# speed up project setup, and make it easy to integrate with third-party tools. 
 orbs:
   docker: circleci/docker@2.1.3
   python: circleci/python@2.0.3
