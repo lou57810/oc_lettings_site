@@ -1,0 +1,67 @@
+# CircleCI configuration file
+version: 2.1
+
+# Orbs = reusable snippets of code that help automate repeated processes,
+# speed up project setup, and make it easy to integrate with third-party tools. 
+orbs:
+  docker: circleci/docker@2.1.3
+  python: circleci/python@2.0.3
+
+jobs:
+    pytest:
+        docker:
+            - image: cimg/python:3.12
+        steps:
+            - checkout
+            - python/install-packages:
+                pkg-manager: pip3
+                pip-dependency-file: requirements.txt
+            - run:
+                name: execution pytest
+                command: python -m pytest
+    flake8:
+        docker:
+            - image: cimg/python:3.10.2
+        steps:
+            - checkout
+            - python/install-packages:
+                pkg-manager: pip
+                pip-dependency-file: requirements.txt
+            - run:
+                name: Install flake8
+                command: pip3 install flake8
+            - run:
+                name: Generation rapport flake
+                command: flake8
+
+    build:
+        docker:
+        # Primary container image where all steps run
+            - image: cimg/base:2022.05
+        steps:
+            - checkout
+            - run: 
+                name: Build Docker image
+                command: docker build .
+                # docker tag
+                # docker push
+                # Rajouter les crédentials dans variables environnement de circleci.
+                # Hook à réimpléménter à chaques déploiements.
+            - run:
+                name: The Second Step
+                command: |
+                    ls -al
+                    echo '^^^The files in your repo^^^'
+
+workflows:
+    test_build:
+        jobs:
+            - flake8
+            - pytest
+            - build:
+                filters:
+                    branches:
+                        only: main
+                requires:
+                    - pytest
+                    - flake8
