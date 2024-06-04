@@ -1,9 +1,9 @@
-import logging
+# import logging
 from django.shortcuts import render
 from .models import Profile
 
-from django.http import HttpResponseNotFound
-from sentry_sdk import capture_message
+# from django.http import HttpResponseNotFound
+# from sentry_sdk import capture_message
 
 """
 def my_custom_page_not_found_view(*args, **kwargs):
@@ -14,12 +14,13 @@ def my_custom_page_not_found_view(*args, **kwargs):
 """
 
 
-
 # Create your views here.
 # Sed placerat quam in pulvinar commodo. Nullam laoreet consectetur ex,
 # sed consequat libero pulvinar eget. Fusc faucibus, urna quis auctor pharetra,
 # massa dolor cursus neque, quis dictum lacus d
 # def profiles_index(request):
+
+
 def index(request):
     profiles_list = Profile.objects.all()
     context = {'profiles_list': profiles_list}

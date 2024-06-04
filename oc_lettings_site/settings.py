@@ -11,15 +11,14 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
 from pathlib import Path
-
+# import dotenv
 from dotenv import load_dotenv
+# from python_dotenv import load_dotenv
 import sentry_sdk   # Ajouté pour le fonctionnement de Sentry sdk
 # from sentry_sdk.integrations.excepthook import ExcepthookIntegration
 # from sentry_sdk.integrations.arq import ArqIntegration
 import logging
-
 
 
 # Set traces_sample_rate to 1.0 to capture 100%
@@ -36,17 +35,17 @@ import logging
 
 # ============= Init Sentry ============= #
 load_dotenv()
-dsn=os.getenv('dsn')
+dsn = os.getenv('dsn')
 
 sentry_sdk.init(dsn,
-max_breadcrumbs=50,
-traces_sample_rate=1.0,
-profiles_sample_rate=1.0,
-# fore_breadcrumb=before_breadcrumb,
-# Alternatively, to control sampling dynamically
-# profiles_sampler=profiles_sampler,
-debug=False,
-)
+                max_breadcrumbs=50,
+                traces_sample_rate=1.0,
+                profiles_sample_rate=1.0,
+                # fore_breadcrumb=before_breadcrumb,
+                # Alternatively, to control sampling dynamically
+                # profiles_sampler=profiles_sampler,
+                debug=False,
+                )
 # ======================================== #
 
 logging.debug("Lettings_site Program is starting!")
@@ -66,18 +65,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(1vv5^6g#^my$%$6*6is*g!)o4xb%-i3r6m7huek(o72#jdh@4'
+# SECRET_KEY = '(1vv5^6g#^my$%$6*6is*g!)o4xb%-i3r6m7huek(o72#jdh@4'
 # SECRET_KEY = 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
-
+SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+# DEBUG = False
+DEBUG = os.getenv('DEBUG')
 
 # ALLOWED_HOSTS = ['172.16.1.108', '127.0.0.1', 'localhost']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'   # Ajouté pour le fonctionnement de Sentry sdk
-
-
-
 
 # Application definition
 
@@ -135,8 +133,14 @@ WSGI_APPLICATION = 'oc_lettings_site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.path.join(BASE_DIR, 'oc-lettings-site.sqlite3'),
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        # 'PASSWORD': 'monpassword',  # A définir dans Dockercompose
+        # 'HOST': 'db',
+        # 'PORT': 5432,
     }
 }
 
@@ -176,6 +180,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static", ]

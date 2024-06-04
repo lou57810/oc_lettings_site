@@ -5,9 +5,10 @@ from django.contrib.auth.models import User
 # from lettings.models import Address, Letting
 from profiles.models import Profile
 
-# Create your tests here.
 
 """ Test création d'une instance de profile models: """
+
+
 @pytest.mark.django_db
 def test_profile_creation():
     # Créer un utilisateur pour lier au profil
