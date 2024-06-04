@@ -1,0 +1,42 @@
+version: '3'
+
+networks:
+    my_network:
+        external: False
+
+services:
+  web:
+    build: .
+    container_name: my_website
+    volumes:
+      - 
+
+   django_gunicorn:
+      volumes:
+         - static:/app/static
+      depends_on:
+        - db
+      networks:
+        - my_network
+      env_file:
+        - .env
+
+   db:
+      images: "postgres:latest"
+      container_name: my_website
+      environment:
+        POSTGRES_PASSWORD: my_password
+      volumes:
+        - pgdb:/var/lib/postgresql/data
+      networks:
+        - my_network
+
+    command: python manage.py runserver 0.0.0.0:8000
+
+        volumes:
+           - :/app
+        ports:
+          -8000:8000
+
+
+        

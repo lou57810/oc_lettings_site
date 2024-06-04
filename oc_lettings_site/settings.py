@@ -65,12 +65,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(1vv5^6g#^my$%$6*6is*g!)o4xb%-i3r6m7huek(o72#jdh@4'
+# SECRET_KEY = '(1vv5^6g#^my$%$6*6is*g!)o4xb%-i3r6m7huek(o72#jdh@4'
 # SECRET_KEY = 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
-
+SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = False
+# DEBUG = False
+DEBUG = os.getenv('DEBUG')
 
 # ALLOWED_HOSTS = ['172.16.1.108', '127.0.0.1', 'localhost']
 ALLOWED_HOSTS = ['*']
@@ -132,8 +133,14 @@ WSGI_APPLICATION = 'oc_lettings_site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.path.join(BASE_DIR, 'oc-lettings-site.sqlite3'),
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        # 'PASSWORD': 'monpassword',  # A définir dans Dockercompose
+        # 'HOST': 'db',
+        # 'PORT': 5432,
     }
 }
 
@@ -173,6 +180,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static", ]

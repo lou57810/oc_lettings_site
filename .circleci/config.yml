@@ -10,7 +10,7 @@ orbs:
 jobs:
     pytest:
         docker:
-            - image: cimg/python:3.10.2
+            - image: cimg/python:3.12
         steps:
             - checkout
             - python/install-packages:
@@ -43,6 +43,10 @@ jobs:
             - run: 
                 name: Build Docker image
                 command: docker build .
+                # docker tag
+                # docker push
+                # Rajouter les crédentials dans variables environnement de circleci.
+                # Hook à réimpléménter à chaques déploiements. 
 
 workflows:
     test_build:
