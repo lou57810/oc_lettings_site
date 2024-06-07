@@ -14,8 +14,8 @@ jobs:
         steps:
             - checkout
             - python/install-packages:
-<<<<<<< HEAD
-                pkg-manager: pip3
+
+                pkg-manager: pip
                 pip-dependency-file: requirements.txt
             - run:
                 name: execution pytest
@@ -26,7 +26,7 @@ jobs:
             - run:
                 name: execution pytest
                 command: pytest
->>>>>>> 8636aab1d3945c2ff215beaa3f8688e843b53de6
+
     flake8:
         docker:
             - image: cimg/python:3.10.2
@@ -37,7 +37,7 @@ jobs:
                 pip-dependency-file: requirements.txt
             - run:
                 name: Install flake8
-                command: pip3 install flake8
+                command: pip install flake8
             - run:
                 name: Generation rapport flake
                 command: flake8
