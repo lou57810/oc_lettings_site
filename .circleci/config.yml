@@ -49,8 +49,9 @@ jobs:
             - image: cimg/base:2022.05
         steps:
             - checkout
-            
-                
+            - run:
+                name: connection à Docker hub
+                command: echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER_ID" --password-stdin
 
             - run: 
                 name: Build Docker image
