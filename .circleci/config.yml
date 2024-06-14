@@ -14,11 +14,19 @@ jobs:
         steps:
             - checkout
             - python/install-packages:
+
+                pkg-manager: pip
+                pip-dependency-file: requirements.txt
+            - run:
+                name: execution pytest
+                command: python -m pytest
+
                 pkg-manager: pip
                 pip-dependency-file: requirements.txt
             - run:
                 name: execution pytest
                 command: pytest
+
     flake8:
         docker:
             - image: cimg/python:3.10.2
@@ -29,7 +37,7 @@ jobs:
                 pip-dependency-file: requirements.txt
             - run:
                 name: Install flake8
-                command: pip3 install flake8
+                command: pip install flake8
             - run:
                 name: Generation rapport flake
                 command: flake8
@@ -46,7 +54,15 @@ jobs:
                 # docker tag
                 # docker push
                 # Rajouter les crédentials dans variables environnement de circleci.
-                # Hook à réimpléménter à chaques déploiements. 
+
+                # Hook à réimpléménter à chaques déploiements.
+            - run:
+                name: The Second Step
+                command: |
+                    ls -al
+                    echo '^^^The files in your repo^^^'
+
+                # Hook à réimpléménter à chaques déploiements.
 
 workflows:
     test_build:
