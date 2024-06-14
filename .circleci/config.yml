@@ -20,7 +20,7 @@ jobs:
             - run:
                 name: execution pytest
                 command: python -m pytest
-=======
+
                 pkg-manager: pip
                 pip-dependency-file: requirements.txt
             - run:
@@ -54,16 +54,15 @@ jobs:
                 # docker tag
                 # docker push
                 # Rajouter les crédentials dans variables environnement de circleci.
-<<<<<<< HEAD
+
                 # Hook à réimpléménter à chaques déploiements.
             - run:
                 name: The Second Step
                 command: |
                     ls -al
                     echo '^^^The files in your repo^^^'
-=======
-                # Hook à réimpléménter à chaques déploiements. 
->>>>>>> 8636aab1d3945c2ff215beaa3f8688e843b53de6
+
+                # Hook à réimpléménter à chaques déploiements.
 
 workflows:
     test_build:
