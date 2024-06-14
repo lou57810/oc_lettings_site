@@ -60,9 +60,9 @@ jobs:
                 # docker push
                 # Rajouter les crédentials dans variables environnement de circleci.
 
-<<<<<<< HEAD
+
                 # Hook à réimpléménter à chaques déploiements. Render 
-=======
+
                 # Hook à réimpléménter à chaques déploiements.
             - run:
                 name: The Second Step
@@ -71,7 +71,6 @@ jobs:
                     echo '^^^The files in your repo^^^'
 
                 # Hook à réimpléménter à chaques déploiements.
->>>>>>> 2430cc56947905c447c3ea4b13e6fb7cdeae9c7f
 
 workflows:
     test_build:
