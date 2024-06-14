@@ -50,7 +50,7 @@ jobs:
         steps:
             - checkout
             - run:
-                name: connection à Docker hub                
+                name: connection à Docker hub
                 command: echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER_ID" --password-stdin
 
             - run: 
