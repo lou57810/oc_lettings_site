@@ -1,4 +1,5 @@
 # CircleCI configuration file
+# description: An orb that display website
 version: 2.1
 
 # Orbs = reusable snippets of code that help automate repeated processes,
@@ -40,13 +41,18 @@ jobs:
             - image: cimg/base:2022.05
         steps:
             - checkout
+            - run:
+                name: connection à Docker hub
+                command: docker -u lou57810 --password dckr_pat_s0hwhwuNatGAbkXy9jSSrlUmZOs 
+
             - run: 
                 name: Build Docker image
                 command: docker build .
                 # docker tag
                 # docker push
                 # Rajouter les crédentials dans variables environnement de circleci.
-                # Hook à réimpléménter à chaques déploiements. 
+
+                # Hook à réimpléménter à chaques déploiements. Render 
 
 workflows:
     test_build:
