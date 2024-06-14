@@ -50,8 +50,8 @@ jobs:
         steps:
             - checkout
             - run:
-                name: connection à Docker hub
-                command: docker -u lou57810 --password dckr_pat_s0hwhwuNatGAbkXy9jSSrlUmZOs 
+                name: connection à Docker hub                
+                command: echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER_ID" --password-stdin
 
             - run: 
                 name: Build Docker image
