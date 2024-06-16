@@ -85,14 +85,18 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'oc_lettings_site',
     'lettings',
     'profiles',
 ]
 
+WHITENOISE_MANIFEST_STRICT = False  # Pour éviter l'erreur pytest : missing staticfiles manifest entry
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -103,6 +107,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'oc_lettings_site.urls'
 
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 TEMPLATES = [
     {
@@ -133,14 +143,8 @@ WSGI_APPLICATION = 'oc_lettings_site.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'oc-lettings-site.sqlite3'),
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        # 'PASSWORD': 'monpassword',  # A définir dans Dockercompose
-        # 'HOST': 'db',
-        # 'PORT': 5432,
     }
 }
 
@@ -180,7 +184,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_ROOT = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
+
+# STATIC_ROOT = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static", ]
+# STATICFILES_DIRS = [BASE_DIR / "static_build"]

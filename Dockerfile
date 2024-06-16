@@ -13,22 +13,24 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # COPY ./requirements.txt /app/requirements.txt
 # COPY requirements.txt /app
 # COPY ./requirements.txt /app
+RUN mkdir /app
 
-WORKDIR /app
 
 # RUN python manage.py migrate --noinput
 # RUN python manage.py collectstatic --noinput
 
 # copy all content to work directory /app
 COPY . /app
+WORKDIR /app
 
 # install dependencies in requirements.txt
 RUN pip3 install -r /app/requirements.txt
-
+RUN python manage.py collectstatic --noinput
+# RUN gunicorn -w 4 
 ADD oc-lettings-site.sqlite3 /app
 
-volumes:
-	-static: /static
+# volume:
+# 	- static: /static
 
 # specify the port number the container should expose
 EXPOSE 8000
@@ -39,5 +41,5 @@ EXPOSE 8000
 # ENTRYPOINT ["python", app/manage.py"]
 # CMD ["runserver", 0.0.0.0:8000"]
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-CMD ["python", "gunicorn", "--bind", "0.0.0.0:8000", "oc_lettings_site.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "oc_lettings_site.wsgi:application"]
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
