@@ -144,13 +144,7 @@ WSGI_APPLICATION = 'oc_lettings_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        # 'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.path.join(BASE_DIR, 'oc-lettings-site.sqlite3'),
-        # 'NAME': 'postgres',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'monpassword',  # A définir dans Dockercompose
-        # 'HOST': 'db',
-        # 'PORT': 5432,
     }
 }
 
