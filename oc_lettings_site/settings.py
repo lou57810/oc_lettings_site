@@ -185,11 +185,8 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
 
 # STATIC_ROOT = '/static/'
-<<<<<<< HEAD
 STATICFILES_DIRS = [BASE_DIR / "staticfiles"]
-=======
 # STATICFILES_DIRS = [BASE_DIR / "staticfiles"]
->>>>>>> develop
 STATIC_URL = '/static/'
 # STATICFILES_DIRS = [BASE_DIR / "static", ]
 # STATICFILES_DIRS = [BASE_DIR / "static_build"]
