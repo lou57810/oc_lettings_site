@@ -12,9 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from pathlib import Path
-# import dotenv
 from dotenv import load_dotenv
-# from python_dotenv import load_dotenv
 import sentry_sdk   # Ajouté pour le fonctionnement de Sentry sdk
 # from sentry_sdk.integrations.excepthook import ExcepthookIntegration
 # from sentry_sdk.integrations.arq import ArqIntegration
