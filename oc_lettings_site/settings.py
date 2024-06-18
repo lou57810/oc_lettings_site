@@ -72,7 +72,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG')
 
 # ALLOWED_HOSTS = ['172.16.1.108', '127.0.0.1', 'localhost']
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS")
+ALLOWED_HOSTS = ["*"]
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'   # Ajouté pour le fonctionnement de Sentry sdk
 
 # Application definition
