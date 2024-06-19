@@ -81,7 +81,7 @@ workflows:
                 requires:
                     - pytest
                     - flake8
-            - deploy-to-render
+            - deploy-to-render:
                 filters:
                     branches:
                         only: main
