@@ -56,7 +56,7 @@ jobs:
 
             - run: 
                 name: Build Docker image
-                command: docker -t lou57810/ocr-docker-build build .
+                command: docker build -t lou57810/ocr-docker-build .
             - run:
                 name: Push docker hub image
                 command: docker push lou57810/ocr-docker-build
