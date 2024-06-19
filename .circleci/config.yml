@@ -12,7 +12,7 @@ orbs:
 jobs:
     pytest:
         docker:
-            - image: cimg/python:3.12
+            - image: cimg/python:3.10.2
         steps:
             - checkout
             - python/install-packages:
@@ -47,7 +47,7 @@ jobs:
     build:
         docker:
         # Primary container image where all steps run
-            - image: cimg/base:2022.05
+            - image: cimg/python:3.10.2
         steps:
             - checkout
             - run:
@@ -56,22 +56,18 @@ jobs:
 
             - run: 
                 name: Build Docker image
-                command: docker build .
-                # docker tag
-                # docker push
-                # Rajouter les crédentials dans variables environnement de circleci.
-
-
-                # Hook à réimpléménter à chaques déploiements. Render 
-
-                # Hook à réimpléménter à chaques déploiements.
+                command: docker -t lou57810/ocr-docker-build build .
             - run:
-                name: The Second Step
-                command: |
-                    ls -al
-                    echo '^^^The files in your repo^^^'
+                name: Push docker hub image
+                command: docker push lou57810/ocr-docker-build
 
-                # Hook à réimpléménter à chaques déploiements.
+    deploy-to-render:
+        docker:
+            - image: curlimages/curl:latest
+        steps:
+            - run:
+                name: Call Hook Render
+                command: curl $DEPLOY_HOOK
 
 workflows:
     test_build:
@@ -85,3 +81,9 @@ workflows:
                 requires:
                     - pytest
                     - flake8
+            - deploy-to-render
+                filters:
+                    branches:
+                        only: main
+                requires:
+                    - build
