@@ -20,7 +20,7 @@ import lettings.views
 
 
 # def trigger_error(request):
-# division_by_zero = 1 / 0
+#     division_by_zero = 1 / 0
 
 # handler404 = 'localhost.views.my_custom_page_not_found_view'
 
@@ -30,12 +30,5 @@ urlpatterns = [
     path('', lettings.views.home, name='home'),
     path("lettings/", include("lettings.urls")),
     path("profiles/", include("profiles.urls")),
-
-
-    # path('lettings/', lettings.views.index, name='lettings_index'),
-    # path('lettings/<int:letting_id>/', lettings.views.letting, name='letting'),
-    # path('profiles/', profiles.views.index, name='profiles_index'),
-    # path('profiles/<str:username>/', profiles.views.profile, name='profile'),
-
     path('admin/', admin.site.urls),
 ]

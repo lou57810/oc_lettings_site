@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import sentry_sdk   # Ajouté pour le fonctionnement de Sentry sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 # from sentry_sdk.integrations.excepthook import ExcepthookIntegration
 # from sentry_sdk.integrations.arq import ArqIntegration
 import logging
@@ -36,9 +37,11 @@ load_dotenv()
 dsn = os.getenv('dsn')
 
 sentry_sdk.init(dsn,
+                integrations=[DjangoIntegration()],
                 max_breadcrumbs=50,
                 traces_sample_rate=1.0,
                 profiles_sample_rate=1.0,
+                # send_default_pii=True,
                 # fore_breadcrumb=before_breadcrumb,
                 # Alternatively, to control sampling dynamically
                 # profiles_sampler=profiles_sampler,

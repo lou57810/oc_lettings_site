@@ -4,10 +4,10 @@ import os
 import sys
 
 
-def before_breadcrumb(crumb, hint):
+"""def before_breadcrumb(crumb, hint):
     if crumb['category'] == 'a.spammy.Logger':
         return None
-    return crumb
+    return crumb"""
 
 
 def main():
