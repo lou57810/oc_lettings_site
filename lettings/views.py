@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Letting
+from sentry_sdk import capture_message, capture_exception, set_tag
 
 
 # Create your views here.
@@ -44,9 +45,22 @@ def index(request):
 
 
 def letting(request, letting_id):
-    letting = Letting.objects.get(id=letting_id)
+    
+    try:
+        letting = Letting.objects.get(id=letting_id)
+    except Exception as e:
+    # Alternatively the argument can be omitted
+            
+        set_tag("letting", f"L'utilisateur {request.user} a voulu consulter un id: {letting_id} inexistant!")
+        capture_exception(e)
+        return render(request, 'error404.html')
+
     context = {
         'title': letting.title,
         'address': letting.address,
     }
+    
+    capture_message(f"L'utilisateur, {request.user} a consulte lettings {letting.title}")
     return render(request, 'lettings/letting.html', context)
+
+
