@@ -19,14 +19,14 @@ import lettings.views
 # import profiles.views
 
 
-# def trigger_error(request):
-#     division_by_zero = 1 / 0
+def trigger_error(request):
+    division_by_zero = 1 / 0
 
 # handler404 = 'localhost.views.my_custom_page_not_found_view'
 
 
 urlpatterns = [
-    # path('sentry-debug/', trigger_error),
+    path('sentry-debug/', trigger_error),
     path('', lettings.views.home, name='home'),
     path("lettings/", include("lettings.urls")),
     path("profiles/", include("profiles.urls")),
