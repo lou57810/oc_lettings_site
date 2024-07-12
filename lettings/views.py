@@ -45,12 +45,11 @@ def index(request):
 
 
 def letting(request, letting_id):
-    
+
     try:
         letting = Letting.objects.get(id=letting_id)
     except Exception as e:
     # Alternatively the argument can be omitted
-            
         set_tag("letting", f"L'utilisateur {request.user} a voulu consulter un id: {letting_id} inexistant!")
         capture_exception(e)
         return render(request, 'error404.html')
@@ -59,8 +58,5 @@ def letting(request, letting_id):
         'title': letting.title,
         'address': letting.address,
     }
-    
     capture_message(f"L'utilisateur, {request.user} a consulte lettings {letting.title}")
     return render(request, 'lettings/letting.html', context)
-
-

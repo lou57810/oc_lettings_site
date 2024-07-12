@@ -1,6 +1,7 @@
 # import logging
 from django.shortcuts import render
 from .models import Profile
+from sentry_sdk import capture_message, capture_exception, set_tag
 
 # from django.http import HttpResponseNotFound
 # from sentry_sdk import capture_message
@@ -33,7 +34,20 @@ def index(request):
 # Sed tincidunt, dolor id facilisis fringilla, eros leo tristique lacus,
 # it. Nam aliquam dignissim congue.
 # Pellentesque habitant morbi tristique senectus et netus et males
+
 def profile(request, username):
-    profile = Profile.objects.get(user__username=username)
+    try:
+        profile = Profile.objects.get(user__username=username)
+    except Exception as e:
+    # Alternatively the argument can be omitted
+            
+        set_tag("letting", f"L'utilisateur {request.user} a voulu consulter un profil: {username} inexistant!")
+        capture_exception(e)
+        return render(request, 'error404.html')
+    
     context = {'profile': profile}
     return render(request, 'profiles/profile.html', context)
+
+    """profile = Profile.objects.get(user__username=username)
+    context = {'profile': profile}
+    return render(request, 'profiles/profile.html', context)"""

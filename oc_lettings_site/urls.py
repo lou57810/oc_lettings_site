@@ -17,20 +17,37 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import lettings.views
+from django.http import HttpResponse
+import time
+from oc_lettings_site.views import index
+from django.shortcuts import render
 # import profiles.views
 
 
-def trigger_error(request):
+"""def trigger_error(request):
     division_by_zero = 1 / 0
-    print(division_by_zero)
+    print(division_by_zero)"""
+    
+def trigger_error(request):
+   try:
+       division_by_zero = 1 / 0
+   except:
+       # division_by_zero = "Hello World"
+       return render(request, 'error500.html')
+   # return HttpResponse(division_by_zero)
 
 # handler404 = 'localhost.views.my_custom_page_not_found_view'
 
+def large_resource(request):
+   time.sleep(4)
+   return HttpResponse("Done!")
+
 
 urlpatterns = [
+    path('', index, name='home'),
     path('sentry-debug/', trigger_error),
-    path('', lettings.views.home, name='home'),
     path("lettings/", include("lettings.urls")),
     path("profiles/", include("profiles.urls")),
     path('admin/', admin.site.urls),
+    path('large_resource/', large_resource),
 ]
