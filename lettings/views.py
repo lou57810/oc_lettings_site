@@ -49,7 +49,7 @@ def letting(request, letting_id):
     try:
         letting = Letting.objects.get(id=letting_id)
     except Exception as e:
-    # Alternatively the argument can be omitted
+        # Alternatively the argument can be omitted
         set_tag("letting", f"L'utilisateur {request.user} a voulu consulter un id: {letting_id} inexistant!")
         capture_exception(e)
         return render(request, 'error404.html')

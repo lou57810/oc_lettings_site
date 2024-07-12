@@ -27,7 +27,7 @@ sentry_sdk.init(dsn,
                 integrations=[DjangoIntegration()],
                 max_breadcrumbs=50,
                 traces_sample_rate=1.0,
-                profiles_sample_rate=1.0,                
+                profiles_sample_rate=1.0,
                 debug=False,
                 )
 
@@ -38,7 +38,6 @@ sentry_sdk.add_breadcrumb(category="logger", message="Program is starting! ", le
 # division_by_zero = 1 / 0
 # logging.debug("Program is starting!")
 # ======================================== #
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
