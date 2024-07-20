@@ -1,3 +1,4 @@
+import pytest
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -7,7 +8,7 @@ from lettings.models import Address, Letting
 
 """ Test Affichage:"""
 
-
+@pytest.mark.django_db
 class HomePageTest(TestCase):
 
     def test_home_page_status_code(self):
@@ -18,7 +19,7 @@ class HomePageTest(TestCase):
         response = self.client.get(reverse('home'))
         self.assertTemplateUsed(response, 'lettings/home.html')
 
-
+@pytest.mark.django_db
 class LettingPageTest(TestCase):
 
     def test_letting_page_status_code(self):
@@ -32,7 +33,7 @@ class LettingPageTest(TestCase):
 
 """ Test logging: """
 
-
+@pytest.mark.django_db
 class UserCreationTest(TestCase):
 
     def test_user_creation(self):
@@ -42,7 +43,7 @@ class UserCreationTest(TestCase):
 
 """ Test création d'une instance de l'adresse. """
 
-
+@pytest.mark.django_db
 class AddressModelTestCase(TestCase):
 
     def test_address_creation(self):
@@ -53,7 +54,7 @@ class AddressModelTestCase(TestCase):
 
 """ Test création d'une instance de Letting. """
 
-
+@pytest.mark.django_db
 class LettingModelTestCase(TestCase):
 
     def test_letting_creation(self):

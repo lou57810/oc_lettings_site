@@ -50,9 +50,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = '(1vv5^6g#^my$%$6*6is*g!)o4xb%-i3r6m7huek(o72#jdh@4'
 SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 # DEBUG = False
-DEBUG = os.getenv('DEBUG')
+if os.getenv('DEBUG') == 'False':
+    DEBUG = False
+    
 
 # ALLOWED_HOSTS = ['172.16.1.108', '127.0.0.1', 'localhost']
 ALLOWED_HOSTS = ["*"]

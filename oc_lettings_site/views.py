@@ -3,7 +3,12 @@ from sentry_sdk import capture_message
 from django.shortcuts import render
 
 
-def my_custom_page_not_found_view(request, *args, **kwargs):
+def custom404(request, *args, **kwargs):
+    capture_message("Page not found!", level="error")
+    return render(request, 'error404.html')
+
+
+def custom500(request, *args, **kwargs):
     capture_message("Page not found!", level="error")
     return render(request, 'error500.html')
 

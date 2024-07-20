@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Letting
 from sentry_sdk import capture_message, capture_exception, set_tag
+from django.http import Http404
 
 
 # Create your views here.
@@ -52,7 +53,8 @@ def letting(request, letting_id):
         # Alternatively the argument can be omitted
         set_tag("letting", f"L'utilisateur {request.user} a voulu consulter un id: {letting_id} inexistant!")
         capture_exception(e)
-        return render(request, 'error404.html')
+        # return render(request, 'error404.html')        
+        raise Http404("Page not found")
 
     context = {
         'title': letting.title,
