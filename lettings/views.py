@@ -53,7 +53,7 @@ def letting(request, letting_id):
         # Alternatively the argument can be omitted
         set_tag("letting", f"L'utilisateur {request.user} a voulu consulter un id: {letting_id} inexistant!")
         capture_exception(e)
-        # return render(request, 'error404.html')        
+        # return render(request, 'error404.html')
         raise Http404("Page not found")
 
     context = {

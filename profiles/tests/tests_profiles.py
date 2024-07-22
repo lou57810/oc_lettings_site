@@ -21,6 +21,7 @@ def test_profile_creation():
     assert profile.user.username == 'testuser'
     assert profile.favorite_city == 'Test City'
 
+
 @pytest.mark.django_db
 class ProfilePageTest(TestCase):
     def test_profile_page_status_code(self):

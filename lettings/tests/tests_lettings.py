@@ -3,11 +3,9 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
 from lettings.models import Address, Letting
-# from profiles.models import Profile
 
 
-""" Test Affichage:"""
-
+# Test Affichage:
 @pytest.mark.django_db
 class HomePageTest(TestCase):
 
@@ -18,6 +16,7 @@ class HomePageTest(TestCase):
     def test_home_page_template(self):
         response = self.client.get(reverse('home'))
         self.assertTemplateUsed(response, 'lettings/home.html')
+
 
 @pytest.mark.django_db
 class LettingPageTest(TestCase):
@@ -31,8 +30,7 @@ class LettingPageTest(TestCase):
         self.assertTemplateUsed(response, 'lettings/index.html')
 
 
-""" Test logging: """
-
+# Test logging:
 @pytest.mark.django_db
 class UserCreationTest(TestCase):
 
@@ -41,8 +39,7 @@ class UserCreationTest(TestCase):
         self.assertTrue(User.objects.filter(username='testuser').exists())
 
 
-""" Test création d'une instance de l'adresse. """
-
+# Test création d'une instance de l'adresse.
 @pytest.mark.django_db
 class AddressModelTestCase(TestCase):
 
@@ -52,8 +49,7 @@ class AddressModelTestCase(TestCase):
         self.assertEqual(str(address), '123 Test Street')
 
 
-""" Test création d'une instance de Letting. """
-
+# Test création d'une instance de Letting.
 @pytest.mark.django_db
 class LettingModelTestCase(TestCase):
 
