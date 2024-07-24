@@ -44,7 +44,7 @@ def profile(request, username):
         set_tag("letting", f"L'utilisateur {request.user} a consulter un profil: {username} inexistant!")
         capture_exception(e)
         return render(request, 'error404.html')
-
+    
     context = {'profile': profile}
     return render(request, 'profiles/profile.html', context)
 
