@@ -91,7 +91,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'oc_lettings_site.urls'
 
-STORAGES = {
+STATICFILES_STORAGES = {
     # ...
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
