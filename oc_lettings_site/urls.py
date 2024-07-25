@@ -12,21 +12,6 @@ def homepage_view(request):
     raise Exception("This is a test error")
 
 
-"""
-def trigger_error(request):
-    try:
-        division_by_zero = 1 / 0
-
-    except Exception as e:
-        raise RuntimeError("Critical failure.") from e
-        print("Operation forbidden!")
-        # return HttpResponse(division_by_zero)
-        # handler404 = 'localhost.views.my_custom_page_not_found_view'
-        # handler500 = 'localhost.views.my_custom_page_not_found_view'
-        # return render(request, 'error500.html')
-"""
-
-
 def large_resource(request):
     time.sleep(4)
     return HttpResponse("Done!")
@@ -43,3 +28,18 @@ urlpatterns = [
     path("profiles/", include("profiles.urls")),
     path('admin/', admin.site.urls),
     path('large_resource/', large_resource),]
+
+
+"""
+def trigger_error(request):
+    try:
+        division_by_zero = 1 / 0
+
+    except Exception as e:
+        raise RuntimeError("Critical failure.") from e
+        print("Operation forbidden!")
+        # return HttpResponse(division_by_zero)
+        # handler404 = 'localhost.views.my_custom_page_not_found_view'
+        # handler500 = 'localhost.views.my_custom_page_not_found_view'
+        # return render(request, 'error500.html')
+"""

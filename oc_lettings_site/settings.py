@@ -51,10 +51,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# DEBUG = False
-# if os.getenv('DEBUG') == 'False':
-    # DEBUG = False
-    # STATIC_ROOT = ''
+DEBUG = False
+if os.getenv('DEBUG') == 'False':
+    DEBUG = False
 
 
 # ALLOWED_HOSTS = ['172.16.1.108', '127.0.0.1', 'localhost']
@@ -72,7 +71,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    # 'oc_lettings_site',
+    'oc_lettings_site',
     'lettings',
     'profiles',
 ]
@@ -93,7 +92,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'oc_lettings_site.urls'
 
 STATICFILES_STORAGES = {
-    # ...
+    #
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
@@ -170,16 +169,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-# STATIC_URL = 'staticfiles/'
-# STATICFILES_DIRS = [BASE_DIR / "staticfiles/",]
-# STATICFILES_DIRS = (os.path.join(BASE_DIR / '/'),)
 
-# STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
-# STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles/')
-# STATICFILES_DIRS = os.path.join(BASE_DIR / 'staticfiles/',)
-# STATICFILES_DIRS = [BASE_DIR / "static_build"]
+STATIC_URL = '/static/'
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR.joinpath('static/')]
+STATICFILES_DIRS = [BASE_DIR / "static",]
 
-STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles',)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

@@ -25,7 +25,6 @@ def my_custom_page_not_found_view(*args, **kwargs):
 def index(request):
     profiles_list = Profile.objects.all()
     context = {'profiles_list': profiles_list}
-    # return render(request, 'profiles/profiles_index.html', context)
     return render(request, 'profiles/index.html', context)
 
 
@@ -37,17 +36,14 @@ def index(request):
 
 def profile(request, username):
     try:
+        print('user:', username)
         profile = Profile.objects.get(user__username=username)
     except Exception as e:
         # Alternatively the argument can be omitted
 
-        set_tag("letting", f"L'utilisateur {request.user} a consulter un profil: {username} inexistant!")
+        set_tag("profile", f"L'utilisateur {request.user} a consulter un profil: {username} inexistant!")
         capture_exception(e)
         return render(request, 'error404.html')
-    
+
     context = {'profile': profile}
     return render(request, 'profiles/profile.html', context)
-
-    """profile = Profile.objects.get(user__username=username)
-    context = {'profile': profile}
-    return render(request, 'profiles/profile.html', context)"""
