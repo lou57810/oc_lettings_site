@@ -16,6 +16,7 @@ def large_resource(request):
     time.sleep(4)
     return HttpResponse("Done!")
 
+
 handler404 = 'oc_lettings_site.views.custom404'
 handler500 = 'oc_lettings_site.views.custom500'
 
